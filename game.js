@@ -1,4 +1,4 @@
-var dimension = 35;
+var dimension = 40;
 var chanceOfLiveCell = 0.5;
 var table;
 var cells;
@@ -13,7 +13,6 @@ var intervalId;
  */
 $(document).ready(function() {
 
-//   alert(1);
     table = $('#main');
     initializeGame();
     cells = table.find('td');

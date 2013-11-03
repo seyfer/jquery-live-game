@@ -1,3 +1,12 @@
+#mainTable {
+    text-align: center;
+    margin: 0 auto;
+}
+
+table {
+
+}
+
 td {
     border: solid 1px silver;
     width: 10px;
@@ -14,6 +23,27 @@ td.alive {
 
 h1 {
     color: red;
+}
+
+#gameInfo {
+    text-align: center;
+}
+
+#game {
+
+}
+
+#mainTable {
+    position: relative;
+    float: left;
+    left: 50%;
+
+}
+
+#main {
+    position: relative;
+    float: right;
+    right: 50%;
 }
 
 #currentGeneration, #currentAliveCount {

@@ -10,19 +10,27 @@
         <link rel="stylesheet" href="game.css" />
     </head>
     <body>
-        <h1>jquery-life.me</h1>
+        <div id="game">
+            <div id="gameInfo">
+                <h1>jquery-life.me</h1>
 
-        <input type="button" value="Start" id="startButton">
-        <input type="button" value="Stop" id="stopButton">
+                <input type="button" value="Start" id="startButton">
+                <input type="button" value="Stop" id="stopButton">
 
-        |
+                |
 
-        <label>CurrentGeneration</label>
-        <input type="text" value="0" id="currentGeneration">
+                <label>Generation</label>
+                <input type="text" value="0" id="currentGeneration">
 
-        <label>Alive</label>
-        <input type="text" value="0" id="currentAliveCount">
+                <label>Alive</label>
+                <input type="text" value="0" id="currentAliveCount">
+            </div>
 
-        <table id="main"></table>
+            <br>
+
+            <div id="mainTable">
+                <table id="main"></table>
+            </div>
+        </div>
     </body>
 </html>
