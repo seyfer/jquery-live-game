@@ -2,14 +2,32 @@ var dimension = 35;
 var chanceOfLiveCell = 0.5;
 var table;
 var cells;
+var speed = 100;
+var log = true;
+var currentGeneration = 0;
+var currentAliveCount = 0;
+var intervalId;
 
+/**
+ * по готовности - пли!
+ */
 $(document).ready(function() {
 
 //   alert(1);
     table = $('#main');
     initializeGame();
-
     cells = table.find('td');
+    writeInfo();
+
+    $("#startButton").click(function() {
+        intervalId = start(speed);
+//        consoleLog(intervalId);
+    });
+
+    $("#stopButton").click(function() {
+        stop(intervalId);
+    });
+
     placeRandomCells();
     playGame();
 
@@ -26,7 +44,6 @@ function initializeGame()
 
         trHtml.push('<tr>');
         for (var x = 0; x < dimension; x++) {
-//            trHtml.push('<td>&nbsp</td>');
             trHtml.push('<td></td>');
         }
 
@@ -45,11 +62,11 @@ function initializeGame()
  */
 function placeRandomCells()
 {
-    consoleLog("placeRandomCells");
+//    consoleLog("placeRandomCells");
     for (var y = 0; y < dimension; y++) {
         for (var x = 0; x < dimension; x++) {
 
-            consoleLog("placeRandomCells");
+//            consoleLog("placeRandomCells");
             var cell = getCell(x, y);
             if (Math.random() > chanceOfLiveCell) {
                 cell.addClass('alive');
@@ -67,7 +84,48 @@ function placeRandomCells()
 function playGame()
 {
     playGeneration();
-    setTimeout('playGame()', 500);
+
+    writeInfo();
+
+
+}
+
+/**
+ * запуск игры
+ * @param {type} speed
+ * @returns {start.interval}
+ */
+function start(speed)
+{
+    var interval = setInterval('playGame()', speed);
+    return interval;
+}
+
+/**
+ * остановка игры
+ * @param {type} intervalId
+ * @returns {undefined}
+ */
+function stop(intervalId)
+{
+//    consoleLog('stop');
+    clearInterval(intervalId);
+}
+
+/**
+ * информация
+ * @returns {undefined}
+ */
+function writeInfo()
+{
+    curGenInput = $("#currentGeneration");
+    curGenInput.val(currentGeneration);
+    curGenInput.prop("disabled", true);
+
+    curAliveInput = $("#currentAliveCount");
+//    curAliveInput.val($("td.alive").length);
+    curAliveInput.val(cells.filter(".alive").length);
+    curAliveInput.prop("disabled", true);
 }
 
 /**
@@ -78,8 +136,10 @@ function playGeneration()
 {
     prepareNextGeneration();
 
-    consoleLog(cells);
+//    consoleLog(cells);
     renderNextGeneration();
+
+    currentGeneration++;
 }
 
 /**
@@ -91,14 +151,14 @@ function prepareNextGeneration()
     for (var y = 0; y < dimension; y++) {
         for (var x = 0; x < dimension; x++) {
 
-            consoleLog("prepareNextGeneration");
+//            consoleLog("prepareNextGeneration");
             var cell = getCell(x, y);
             var neighbours = getLiveNeighbourCount(x, y);
 
             cell.prop('isalive', 'false');
             if (isCellAlive(x, y)) {
 
-                consoleLog(neighbours);
+//                consoleLog(neighbours);
 
                 if (neighbours === 2 || neighbours === 3) {
                     cell.prop('isalive', 'true');
@@ -123,7 +183,7 @@ function renderNextGeneration()
         cell.removeClass('alive');
 
         if (cell.prop('isalive') === 'true') {
-            consoleLog(3);
+//            consoleLog(3);
             cell.addClass('alive');
         }
 
@@ -207,8 +267,6 @@ function getCell(x, y)
  */
 function consoleLog(item)
 {
-    var log = false;
-
     if (log) {
         console.log(item);
     }
