@@ -1,6 +1,11 @@
 td {
     border: solid 1px silver;
-    width: 20px;
+    width: 10px;
+    height: 10px;
+}
+
+tr {
+
 }
 
 td.alive {
